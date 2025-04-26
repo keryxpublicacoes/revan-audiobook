@@ -39,7 +39,7 @@
     }
 
     .info-principal h1 {
-      font-size: 24px;
+      font-size: 20px;
       margin: 0 0 20px 0;
       text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
       color: #d2ab62;
@@ -47,16 +47,17 @@
     }
 
     .info-principal p {
-      font-size: 18px;
+      font-size: 17px;
       line-height: 1.7;
       color: #bbb;
       margin-bottom: 12px;
     }
 
     .highlight {
-      font-size: 18px;
+      font-size: 17px;
       color: #d2ab62;
       margin-top: 15px;
+      text-align: center;
     }
 
     .content {
@@ -77,7 +78,7 @@
 
     .chapter h2 {
       margin-bottom: 20px;
-      font-size: 20px;
+      font-size: 18px;
       color: #ccc;
     }
 
@@ -111,19 +112,9 @@
       display: inline-block;
       width: 5px;
       height: 20px;
-      background: #d2ab62;
+      background: #444;
       margin: 0 2px;
-      animation: wave 1s infinite;
-      animation-delay: calc(var(--i) * 0.1s);
-    }
-
-    @keyframes wave {
-      0%, 100% {
-        transform: scaleY(1);
-      }
-      50% {
-        transform: scaleY(2);
-      }
+      animation: none;
     }
 
     audio {
@@ -133,7 +124,7 @@
     }
 
     .btn-play-all {
-      background-color: #ff0000;
+      background-color: #d2ab62;
       border: none;
       padding: 12px 24px;
       margin: 20px auto 50px;
@@ -141,8 +132,14 @@
       font-size: 16px;
       border-radius: 8px;
       cursor: pointer;
-      color: white;
+      color: black;
       font-weight: 600;
+    }
+
+    .btn-play-all::before {
+      content: '\25B6';
+      color: red;
+      margin-right: 8px;
     }
 
     footer {
@@ -164,7 +161,7 @@
       }
 
       .info-principal h1 {
-        font-size: 22px;
+        font-size: 20px;
         text-align: center;
       }
 
@@ -174,9 +171,7 @@
     }
   </style>
 </head>
-
 <body>
-
   <header>
     <div class="capa-livro">
       <img src="mockup_fone2.png" alt="Audiobook do Livro">
@@ -188,7 +183,7 @@
     </div>
   </header>
 
-  <button class="btn-play-all" onclick="playAll()">▶️ Ouvir Todos os Capítulos</button>
+  <button class="btn-play-all" onclick="playAll()">Ouvir Todos os Capítulos</button>
 
   <div class="content">
     <div class="chapter">
@@ -200,13 +195,11 @@
           Seu navegador não suporta o elemento de áudio.
         </audio>
       </div>
-      <div class="audio-wave">
-        <span style="--i:1"></span><span style="--i:2"></span><span style="--i:3"></span><span style="--i:4"></span><span style="--i:5"></span>
+      <div class="audio-wave" id="wave1">
+        <span></span><span></span><span></span><span></span><span></span>
       </div>
     </div>
-
-    <!-- Repetir estrutura para os próximos capítulos -->
-
+    <!-- Outros capítulos aqui -->
   </div>
 
   <footer>
@@ -214,14 +207,23 @@
   </footer>
 
   <script>
-    const players = [1,2,3,4,5,6];
+    const players = [1];
     players.forEach(id => {
       const audio = document.getElementById(`audio${id}`);
       const progress = document.getElementById(`progress${id}`);
+      const wave = document.getElementById(`wave${id}`);
 
       audio.addEventListener('timeupdate', () => {
         const percent = (audio.currentTime / audio.duration) * 100;
         progress.style.width = percent + '%';
+      });
+
+      audio.addEventListener('play', () => {
+        wave.querySelectorAll('span').forEach(span => span.style.animation = 'wave 1s infinite');
+      });
+
+      audio.addEventListener('pause', () => {
+        wave.querySelectorAll('span').forEach(span => span.style.animation = 'none');
       });
     });
 
@@ -240,6 +242,5 @@
       playNext();
     }
   </script>
-
 </body>
 </html>
