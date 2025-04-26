@@ -6,8 +6,93 @@
   <title>Revan - A História de um Homem</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    /* Estilos mantidos conforme acertamos antes */
-    /* (Aqui permanecem os estilos que você já conferiu, não alterei) */
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #000;
+      color: #fff;
+    }
+    header {
+      text-align: center;
+      padding: 20px;
+    }
+    .capa-livro img {
+      width: 80%;
+      max-width: 300px;
+      margin: 0 auto;
+      display: block;
+    }
+    .info-principal {
+      margin-top: 20px;
+    }
+    .info-principal h1 {
+      font-size: 1.8rem;
+      color: #d2ab62;
+    }
+    .info-principal p {
+      font-size: 0.9rem;
+      margin: 10px 20px;
+      text-align: center;
+    }
+    .highlight {
+      font-weight: bold;
+      color: #d2ab62;
+    }
+    .btn-play-all {
+      margin-top: 20px;
+      background: #000;
+      color: #fff;
+      border: 2px solid #fff;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .btn-play-all:hover {
+      background: #d2ab62;
+      color: #000;
+    }
+    .content {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+    }
+    .chapter {
+      background: #111;
+      padding: 20px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 500px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
+    }
+    .chapter h2 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+    audio {
+      width: 100%;
+      outline: none;
+    }
+    footer {
+      margin-top: 40px;
+      padding: 20px;
+      font-size: 0.8rem;
+      text-align: center;
+      background: #000;
+      color: #888;
+    }
+    #progress-bar {
+      height: 4px;
+      background: #d2ab62;
+      width: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 9999;
+    }
   </style>
 </head>
 <body>
@@ -21,25 +106,34 @@
       <h1>Revan – A História de um Homem</h1>
       <p>Em meio a lutas, conquistas e superações, Revan descobre que a verdadeira vitória está em permanecer firme. Um testemunho de coragem e fé que inspira a acreditar no impossível.</p>
       <p class="highlight">Ouça agora o seu Audiobook e permita que a fé e a coragem renovem seu coração.</p>
-      <button class="btn-play-all" onclick="playAll()">Ouvir Todos os Capítulos</button>
+      <button class="btn-play-all" onclick="playAll()">▶️ Ouvir Todos os Capítulos</button>
     </div>
   </header>
 
   <div class="content">
     <!-- Capítulos -->
-    " + Array.from({length: 28}, (_, i) => {
-      const num = i + 1;
-      return `
-      <div class="chapter">
-        <h2>Capítulo ${num}</h2>
-        <div class="player-container">
-          <audio controls preload="none" id="audio${num}">
-            <source src="capitulo${num}.mp3" type="audio/mp3">
-            Seu navegador não suporta áudio.
-          </audio>
+    <!-- Capítulos de 1 a 28 -->
+    
+    <!-- Gerado automaticamente -->
+    
+    <!-- Início dos capítulos -->
+    
+    <script>
+      for (let i = 1; i <= 28; i++) {
+        document.write(`
+        <div class="chapter">
+          <h2>Capítulo ${i}</h2>
+          <div class="player-container">
+            <audio controls preload="none" id="audio${i}">
+              <source src="capitulo${i}.mp3" type="audio/mp3">
+              Seu navegador não suporta áudio.
+            </audio>
+          </div>
         </div>
-      </div>`;
-    }).join('') + "
+        `);
+      }
+    </script>
+
   </div>
 
   <footer>
