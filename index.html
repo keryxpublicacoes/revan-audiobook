@@ -57,7 +57,7 @@
     }
 
     .info-principal p {
-      font-size: 16px;
+      font-size: 15px;
       line-height: 1.5;
       color: #bbb;
       margin-bottom: 10px;
@@ -65,7 +65,7 @@
     }
 
     .highlight {
-      font-size: 16px;
+      font-size: 15px;
       color: #d2ab62;
       margin-top: 10px;
       text-align: center;
@@ -73,13 +73,15 @@
 
     .content {
       flex: 1;
-      max-width: 800px;
+      max-width: 1000px;
       margin: 20px auto;
       padding: 10px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
     }
 
     .chapter {
-      margin-bottom: 20px;
       padding: 18px;
       border-radius: 10px;
       text-align: center;
@@ -150,94 +152,14 @@
         font-size: 20px;
       }
 
-      .info-principal p {
-        font-size: 15px;
+      .info-principal p, .highlight {
+        font-size: 14px;
+      }
+
+      .content {
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 <body>
-  <div id="progress-bar"></div>
-  <header>
-    <div class="capa-livro">
-      <img src="mockup_fone2.png" alt="Audiobook do Livro">
-    </div>
-    <div class="info-principal">
-      <h1>Revan - A História de um Homem</h1>
-      <p>Em meio a lutas, conquistas e superações, Revan descobre que a verdadeira vitória está em permanecer firme. Um testemunho de coragem e fé que inspira a acreditar no impossível.</p>
-      <p class="highlight">Ouça agora esta história inspiradora e permita que a fé e a coragem renovem seu coração.</p>
-    </div>
-  </header>
-
-  <button class="btn-play-all" onclick="playAll()">Ouvir Todos os Capítulos</button>
-
-  <div class="content" id="content">
-    <!-- Capítulos serão inseridos aqui pelo script -->
-  </div>
-
-  <footer>
-    &copy; 2025 Keryx Publicações - Todos os direitos reservados
-  </footer>
-
-  <script>
-    const chapterTitles = [
-      "Um Novo Começo", "Superando Limites", "Influências", "Direcionamento", "Caminhos", "Novas Conquistas",
-      "Mudança de Direção", "Redescobrindo Forças", "A Escolha Correta", "Prosseguindo", "Avançando com Coragem",
-      "Resistindo", "Persistindo na Jornada", "Olhando para o Alvo", "Fé Inabalável", "O Poder da Esperança",
-      "Renovação Interior", "A Última Milha", "Conquista Final", "Testemunho Vivo", "O Recomeço", "Superação Diária",
-      "Novos Horizontes", "Confiança Restaurada", "Desafios e Vitórias", "Passos de Fé", "Gratidão na Jornada", "Destino Alcançado"
-    ];
-
-    const contentDiv = document.getElementById('content');
-
-    chapterTitles.forEach((title, index) => {
-      const num = index + 1;
-      const chapterDiv = document.createElement('div');
-      chapterDiv.className = 'chapter';
-      chapterDiv.innerHTML = `
-        <h2>Capítulo ${num} - ${title}</h2>
-        <div class="player-container">
-          <audio controls id="audio${num}">
-            <source src="https://revan-audiobook.onrender.com/capitulo${num}.mp3" type="audio/mpeg">
-            Seu navegador não suporta o elemento de áudio.
-          </audio>
-        </div>
-      `;
-      contentDiv.appendChild(chapterDiv);
-    });
-
-    function playAll() {
-      const audios = document.querySelectorAll('audio');
-      let index = 0;
-      function playNext() {
-        if (index < audios.length) {
-          audios.forEach((audio, idx) => { if (idx !== index) audio.pause(); });
-          audios[index].play();
-          audios[index].onended = () => {
-            index++;
-            playNext();
-          };
-        }
-      }
-      playNext();
-    }
-
-    document.addEventListener('play', function(e){
-      const audios = document.querySelectorAll('audio');
-      audios.forEach(audio => {
-        if(audio !== e.target){
-          audio.pause();
-        }
-      });
-    }, true);
-
-    window.addEventListener('scroll', () => {
-      const progressBar = document.getElementById('progress-bar');
-      const scrollTop = window.scrollY;
-      const docHeight = document.body.scrollHeight - window.innerHeight;
-      const progress = (scrollTop / docHeight) * 100;
-      progressBar.style.width = progress + '%';
-    });
-  </script>
-</body>
-</html>
