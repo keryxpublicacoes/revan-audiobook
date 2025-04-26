@@ -8,207 +8,57 @@
   <style>
     body {
       margin: 0;
-      padding: 0;
-      background-color: #000;
       font-family: 'Poppins', sans-serif;
-      color: white;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      background: #000;
+      color: #fff;
     }
-
     header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
-      gap: 50px;
-      max-width: 1200px;
-      margin: auto;
-      flex-wrap: wrap;
+      text-align: center;
+      padding: 20px;
     }
-
     .capa-livro img {
-      width: 600px;
-      max-width: 95%;
-      border-radius: 12px;
-    }
-
-    .info-principal {
-      max-width: 500px;
-    }
-
-    .info-principal h1 {
-      font-size: 20px;
-      margin: 0 0 20px 0;
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
-      color: #d2ab62;
-      text-align: center;
-    }
-
-    .info-principal p {
-      font-size: 17px;
-      line-height: 1.7;
-      color: #bbb;
-      margin-bottom: 12px;
-      text-align: center;
-    }
-
-    .highlight {
-      font-size: 17px;
-      color: #d2ab62;
-      margin-top: 15px;
-      text-align: center;
-    }
-
-    .content {
-      flex: 1;
-      max-width: 800px;
-      margin: 30px auto;
-      padding: 20px;
-    }
-
-    .chapter {
-      margin-bottom: 40px;
-      padding: 20px;
-      border-radius: 10px;
-      text-align: center;
-      background-color: #111;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-    }
-
-    .chapter h2 {
-      margin-bottom: 15px;
-      font-size: 16px;
-      color: #ccc;
-    }
-
-    .player-container {
-      width: 100%;
-      background-color: #1a1a1a;
-      border-radius: 10px;
-      box-shadow: 0 0 8px rgba(210,171,98,0.4);
-      margin-bottom: 10px;
-    }
-
-    audio {
-      width: 100%;
-      height: 50px;
-      background-color: #000;
-    }
-
-    .btn-play-all {
-      background-color: #d2ab62;
-      border: none;
-      padding: 12px 24px;
-      margin: 20px auto 50px;
+      width: 80%;
+      max-width: 300px;
+      margin: 0 auto;
       display: block;
-      font-size: 16px;
+    }
+    .info-principal {
+      margin-top: 20px;
+    }
+    .info-principal h1 {
+      font-size: 1.8rem;
+      color: #d2ab62;
+    }
+    .info-principal p {
+      font-size: 0.7rem;
+      margin: 10px 20px;
+      text-align: center;
+    }
+    .highlight {
+      font-weight: bold;
+      color: #d2ab62;
+    }
+    .btn-play-all {
+      margin-top: 20px;
+      background: #000;
+      color: #fff;
+      border: 2px solid #fff;
+      padding: 10px 20px;
+      font-size: 1rem;
       border-radius: 8px;
       cursor: pointer;
-      color: black;
-      font-weight: 600;
-      position: relative;
     }
-
-    .btn-play-all::before {
-      content: '\25B6';
-      color: black;
-      margin-right: 8px;
+    .btn-play-all:hover {
+      background: #d2ab62;
+      color: #000;
     }
-
-    footer {
-      text-align: center;
+    .content {
       padding: 20px;
-      font-size: 14px;
-      background: rgba(0,0,0,0.7);
-      border-top: 1px solid rgba(255,255,255,0.2);
-      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
     }
-
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-      }
-
-      .capa-livro img {
-        width: 95%;
-      }
-
-      .info-principal h1 {
-        font-size: 20px;
-        text-align: center;
-      }
-
-      .info-principal p {
-        font-size: 16px;
-      }
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <div class="capa-livro">
-      <img src="mockup_fone2.png" alt="Audiobook do Livro">
-    </div>
-    <div class="info-principal">
-      <h1>Revan - A História de um Homem</h1>
-      <p>Em meio a lutas, conquistas e superações, Revan descobre que a verdadeira vitória está em permanecer firme. Um testemunho de coragem e fé que inspira a acreditar no impossível.</p>
-      <p class="highlight">Ouça agora esta história inspiradora e permita que a fé e a coragem renovem seu coração.</p>
-    </div>
-  </header>
-
-  <button class="btn-play-all" onclick="playAll()">Ouvir Todos os Capítulos</button>
-
-  <div class="content" id="content">
-    <!-- Capítulos serão inseridos aqui pelo script -->
-  </div>
-
-  <footer>
-    &copy; 2025 Keryx Publicações - Todos os direitos reservados
-  </footer>
-
-  <script>
-    const chapterTitles = [
-      "Um Novo Começo", "Superando Limites", "Influências", "Direcionamento", "Caminhos", "Novas Conquistas",
-      "Mudança de Direção", "Redescobrindo Forças", "A Escolha Correta", "Prosseguindo", "Avançando com Coragem",
-      "Resistindo", "Persistindo na Jornada", "Olhando para o Alvo", "Fé Inabalável", "O Poder da Esperança",
-      "Renovação Interior", "A Última Milha", "Conquista Final", "Testemunho Vivo", "O Recomeço", "Superação Diária",
-      "Novos Horizontes", "Confiança Restaurada", "Desafios e Vitórias", "Passos de Fé", "Gratidão na Jornada", "Destino Alcançado"
-    ];
-
-    const contentDiv = document.getElementById('content');
-
-    chapterTitles.forEach((title, index) => {
-      const num = index + 1;
-      const chapterDiv = document.createElement('div');
-      chapterDiv.className = 'chapter';
-      chapterDiv.innerHTML = `
-        <h2>Capítulo ${num} - ${title}</h2>
-        <div class="player-container">
-          <audio controls>
-            <source src="https://revan-audiobook.onrender.com/capitulo${num}.mp3" type="audio/mpeg">
-            Seu navegador não suporta o elemento de áudio.
-          </audio>
-        </div>
-      `;
-      contentDiv.appendChild(chapterDiv);
-    });
-
-    function playAll() {
-      const audios = document.querySelectorAll('audio');
-      let index = 0;
-      function playNext() {
-        if (index < audios.length) {
-          audios[index].play();
-          audios[index].onended = () => {
-            index++;
-            playNext();
-          };
-        }
-      }
-      playNext();
-    }
-  </script>
-</body>
-</html>
+    .chapter {
+      background: #111;
+      padding: 20px;
