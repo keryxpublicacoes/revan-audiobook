@@ -17,6 +17,16 @@
       flex-direction: column;
     }
 
+    #progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: #d2ab62;
+      width: 0;
+      z-index: 9999;
+    }
+
     header {
       display: flex;
       align-items: center;
@@ -147,6 +157,7 @@
   </style>
 </head>
 <body>
+  <div id="progress-bar"></div>
   <header>
     <div class="capa-livro">
       <img src="mockup_fone2.png" alt="Audiobook do Livro">
@@ -219,6 +230,14 @@
         }
       });
     }, true);
+
+    window.addEventListener('scroll', () => {
+      const progressBar = document.getElementById('progress-bar');
+      const scrollTop = window.scrollY;
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+      const progress = (scrollTop / docHeight) * 100;
+      progressBar.style.width = progress + '%';
+    });
   </script>
 </body>
 </html>
