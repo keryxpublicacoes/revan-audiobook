@@ -186,7 +186,7 @@
       chapterDiv.innerHTML = `
         <h2>Capítulo ${num} - ${title}</h2>
         <div class="player-container">
-          <audio controls>
+          <audio controls id="audio${num}">
             <source src="https://revan-audiobook.onrender.com/capitulo${num}.mp3" type="audio/mpeg">
             Seu navegador não suporta o elemento de áudio.
           </audio>
@@ -200,6 +200,7 @@
       let index = 0;
       function playNext() {
         if (index < audios.length) {
+          audios.forEach((audio, idx) => { if (idx !== index) audio.pause(); });
           audios[index].play();
           audios[index].onended = () => {
             index++;
@@ -209,6 +210,15 @@
       }
       playNext();
     }
+
+    document.addEventListener('play', function(e){
+      const audios = document.querySelectorAll('audio');
+      audios.forEach(audio => {
+        if(audio !== e.target){
+          audio.pause();
+        }
+      });
+    }, true);
   </script>
 </body>
 </html>
