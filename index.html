@@ -105,6 +105,19 @@
       background-color: #000;
     }
 
+    .btn-play-all {
+      background-color: #d2ab62;
+      border: none;
+      padding: 12px 24px;
+      margin: 20px auto 50px;
+      display: block;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      color: black;
+      font-weight: 600;
+    }
+
     footer {
       text-align: center;
       padding: 20px;
@@ -147,6 +160,8 @@
       <p class="highlight">Ouça agora esta história inspiradora e permita que a fé e a coragem renovem seu coração.</p>
     </div>
   </header>
+
+  <button class="btn-play-all" onclick="playAll()">▶️ Ouvir Todos os Capítulos</button>
 
   <div class="content">
     <div class="chapter">
@@ -231,6 +246,21 @@
         progress.style.width = percent + '%';
       });
     });
+
+    function playAll() {
+      let index = 0;
+      function playNext() {
+        if (index < players.length) {
+          const audio = document.getElementById(`audio${players[index]}`);
+          audio.play();
+          audio.onended = () => {
+            index++;
+            playNext();
+          };
+        }
+      }
+      playNext();
+    }
   </script>
 
 </body>
