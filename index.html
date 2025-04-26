@@ -75,11 +75,26 @@
       color: #ccc;
     }
 
+    .player-container {
+      position: relative;
+      width: 100%;
+      background-color: #111;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background-color: #d2ab62;
+      width: 0;
+    }
+
     audio {
       width: 100%;
       height: 50px;
-      background-color: #111;
-      border-radius: 10px;
     }
 
     footer {
@@ -103,10 +118,6 @@
         font-size: 22px;
         text-align: center;
       }
-
-      audio {
-        width: 100%;
-      }
     }
   </style>
 </head>
@@ -127,56 +138,87 @@
   <div class="content">
     <div class="chapter">
       <h2>Capítulo 1 - Um Novo Começo</h2>
-      <audio controls>
-        <source src="https://revan-audiobook.onrender.com/capitulo1.mp3" type="audio/mpeg">
-        Seu navegador não suporta o elemento de áudio.
-      </audio>
+      <div class="player-container">
+        <div class="progress-bar" id="progress1"></div>
+        <audio controls id="audio1">
+          <source src="https://revan-audiobook.onrender.com/capitulo1.mp3" type="audio/mpeg">
+          Seu navegador não suporta o elemento de áudio.
+        </audio>
+      </div>
     </div>
 
     <div class="chapter">
       <h2>Capítulo 2 - Superando Limites</h2>
-      <audio controls>
-        <source src="https://revan-audiobook.onrender.com/capitulo2.mp3" type="audio/mpeg">
-        Seu navegador não suporta o elemento de áudio.
-      </audio>
+      <div class="player-container">
+        <div class="progress-bar" id="progress2"></div>
+        <audio controls id="audio2">
+          <source src="https://revan-audiobook.onrender.com/capitulo2.mp3" type="audio/mpeg">
+          Seu navegador não suporta o elemento de áudio.
+        </audio>
+      </div>
     </div>
 
     <div class="chapter">
       <h2>Capítulo 3 - A Jornada Continua</h2>
-      <audio controls>
-        <source src="https://revan-audiobook.onrender.com/capitulo3.mp3" type="audio/mpeg">
-        Seu navegador não suporta o elemento de áudio.
-      </audio>
+      <div class="player-container">
+        <div class="progress-bar" id="progress3"></div>
+        <audio controls id="audio3">
+          <source src="https://revan-audiobook.onrender.com/capitulo3.mp3" type="audio/mpeg">
+          Seu navegador não suporta o elemento de áudio.
+        </audio>
+      </div>
     </div>
 
     <div class="chapter">
       <h2>Capítulo 4 - Atravessando Tempestades</h2>
-      <audio controls>
-        <source src="https://revan-audiobook.onrender.com/capitulo4.mp3" type="audio/mpeg">
-        Seu navegador não suporta o elemento de áudio.
-      </audio>
+      <div class="player-container">
+        <div class="progress-bar" id="progress4"></div>
+        <audio controls id="audio4">
+          <source src="https://revan-audiobook.onrender.com/capitulo4.mp3" type="audio/mpeg">
+          Seu navegador não suporta o elemento de áudio.
+        </audio>
+      </div>
     </div>
 
     <div class="chapter">
       <h2>Capítulo 5 - Mudanças</h2>
-      <audio controls>
-        <source src="https://revan-audiobook.onrender.com/capitulo5.mp3" type="audio/mpeg">
-        Seu navegador não suporta o elemento de áudio.
-      </audio>
+      <div class="player-container">
+        <div class="progress-bar" id="progress5"></div>
+        <audio controls id="audio5">
+          <source src="https://revan-audiobook.onrender.com/capitulo5.mp3" type="audio/mpeg">
+          Seu navegador não suporta o elemento de áudio.
+        </audio>
+      </div>
     </div>
 
     <div class="chapter">
       <h2>Capítulo 6 - Novas Conquistas</h2>
-      <audio controls>
-        <source src="https://revan-audiobook.onrender.com/capitulo6.mp3" type="audio/mpeg">
-        Seu navegador não suporta o elemento de áudio.
-      </audio>
+      <div class="player-container">
+        <div class="progress-bar" id="progress6"></div>
+        <audio controls id="audio6">
+          <source src="https://revan-audiobook.onrender.com/capitulo6.mp3" type="audio/mpeg">
+          Seu navegador não suporta o elemento de áudio.
+        </audio>
+      </div>
     </div>
   </div>
 
   <footer>
     &copy; 2025 Keryx Publicações - Todos os direitos reservados
   </footer>
+
+  <script>
+    const players = [1,2,3,4,5,6];
+    players.forEach(id => {
+      const audio = document.getElementById(`audio${id}`);
+      const progress = document.getElementById(`progress${id}`);
+
+      audio.addEventListener('timeupdate', () => {
+        const percent = (audio.currentTime / audio.duration) * 100;
+        progress.style.width = percent + '%';
+      });
+    });
+  </script>
 
 </body>
 </html>
