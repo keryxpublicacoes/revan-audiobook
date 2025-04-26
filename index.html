@@ -68,8 +68,8 @@
     }
 
     .chapter {
-      margin-bottom: 60px;
-      padding: 25px;
+      margin-bottom: 40px;
+      padding: 20px;
       border-radius: 10px;
       text-align: center;
       background-color: #111;
@@ -77,44 +77,17 @@
     }
 
     .chapter h2 {
-      margin-bottom: 20px;
-      font-size: 18px;
+      margin-bottom: 15px;
+      font-size: 16px;
       color: #ccc;
     }
 
     .player-container {
-      position: relative;
       width: 100%;
       background-color: #1a1a1a;
       border-radius: 10px;
-      overflow: hidden;
       box-shadow: 0 0 8px rgba(210,171,98,0.4);
       margin-bottom: 10px;
-    }
-
-    .progress-bar {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 4px;
-      background-color: #d2ab62;
-      width: 0;
-      transition: width 0.3s ease;
-    }
-
-    .audio-wave {
-      display: flex;
-      justify-content: center;
-      margin-top: 10px;
-    }
-
-    .audio-wave span {
-      display: inline-block;
-      width: 5px;
-      height: 20px;
-      background: #444;
-      margin: 0 2px;
-      animation: none;
     }
 
     audio {
@@ -138,7 +111,7 @@
 
     .btn-play-all::before {
       content: '\25B6';
-      color: red;
+      color: white;
       margin-right: 8px;
     }
 
@@ -185,21 +158,8 @@
 
   <button class="btn-play-all" onclick="playAll()">Ouvir Todos os Capítulos</button>
 
-  <div class="content">
-    <div class="chapter">
-      <h2>Capítulo 1 - Um Novo Começo</h2>
-      <div class="player-container">
-        <div class="progress-bar" id="progress1"></div>
-        <audio controls id="audio1">
-          <source src="https://revan-audiobook.onrender.com/capitulo1.mp3" type="audio/mpeg">
-          Seu navegador não suporta o elemento de áudio.
-        </audio>
-      </div>
-      <div class="audio-wave" id="wave1">
-        <span></span><span></span><span></span><span></span><span></span>
-      </div>
-    </div>
-    <!-- Outros capítulos aqui -->
+  <div class="content" id="content">
+    <!-- Capítulos serão inseridos aqui pelo script -->
   </div>
 
   <footer>
@@ -207,33 +167,55 @@
   </footer>
 
   <script>
-    const players = [1];
-    players.forEach(id => {
-      const audio = document.getElementById(`audio${id}`);
-      const progress = document.getElementById(`progress${id}`);
-      const wave = document.getElementById(`wave${id}`);
+    const chapterTitles = [
+      "Um Novo Começo",
+      "Superando Limites",
+      "Influências",
+      "Direcionamento",
+      "Caminhos",
+      "Novas Conquistas",
+      "Mudança de Direção",
+      "Redescobrindo Forças",
+      "A Escolha Correta",
+      "Prosseguindo",
+      "Avançando com Coragem",
+      "Resistindo",
+      "Persistindo na Jornada",
+      "Olhando para o Alvo",
+      "Fé Inabalável",
+      "O Poder da Esperança",
+      "Renovação Interior",
+      "A Última Milha",
+      "Conquista Final",
+      "Testemunho Vivo",
+      "O Recomeço"
+    ];
 
-      audio.addEventListener('timeupdate', () => {
-        const percent = (audio.currentTime / audio.duration) * 100;
-        progress.style.width = percent + '%';
-      });
+    const contentDiv = document.getElementById('content');
 
-      audio.addEventListener('play', () => {
-        wave.querySelectorAll('span').forEach(span => span.style.animation = 'wave 1s infinite');
-      });
-
-      audio.addEventListener('pause', () => {
-        wave.querySelectorAll('span').forEach(span => span.style.animation = 'none');
-      });
+    chapterTitles.forEach((title, index) => {
+      const num = index + 1;
+      const chapterDiv = document.createElement('div');
+      chapterDiv.className = 'chapter';
+      chapterDiv.innerHTML = `
+        <h2>Capítulo ${num} - ${title}</h2>
+        <div class="player-container">
+          <audio controls>
+            <source src="https://revan-audiobook.onrender.com/capitulo${num}.mp3" type="audio/mpeg">
+            Seu navegador não suporta o elemento de áudio.
+          </audio>
+        </div>
+      `;
+      contentDiv.appendChild(chapterDiv);
     });
 
     function playAll() {
+      const audios = document.querySelectorAll('audio');
       let index = 0;
       function playNext() {
-        if (index < players.length) {
-          const audio = document.getElementById(`audio${players[index]}`);
-          audio.play();
-          audio.onended = () => {
+        if (index < audios.length) {
+          audios[index].play();
+          audios[index].onended = () => {
             index++;
             playNext();
           };
